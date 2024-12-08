@@ -23,7 +23,7 @@ def main():
         
         arrY.append(y)
 
-    print("answer is ", calculate_occurance(mapX, arrY))
+    print(calculate_occurance(mapX, arrY))
 
 
 main()

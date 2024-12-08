@@ -1,5 +1,4 @@
 def calculate_distance(arr1, arr2):
-    # Ensure both lists are the same length
     sum_dist = 0
     for i in range(min(len(arr1), len(arr2))):
         sum_dist += abs(arr1[i] - arr2[i])
@@ -20,7 +19,7 @@ def main():
     arrY.sort()
     arrX.sort()
 
-    print("answer is ", calculate_distance(arrX, arrY))
+    print(calculate_distance(arrX, arrY))
 
 
 main()

@@ -29,22 +29,21 @@ bool checkRule(vector<int> row, map<int, vector<int>> pattern) {
     }
     return true;
 }
-vector<int> sortRow(vector<int>& row, const map<int, vector<int>>& orderMap) {
-    bool swapped;
-    do {
+
+vector<int> sortRow(vector<int>& row, const map<int, vector<int>>& pattern) {
+    bool swapped = true;
+    while (swapped) {
         swapped = false;
-        for (size_t i = 0; i < row.size() - 1; ++i) {
-            int page1 = row[i];
-            int page2 = row[i + 1];
+        for (size_t i = 0; i < row.size() - 1; i++) {
+            int cur = row[i];
+            int next = row[i + 1];
             
-            // Check if page1 should come before page2 based on the orderMap
-            if (orderMap.find(page1) != orderMap.end() && find(orderMap.at(page1).begin(), orderMap.at(page1).end(), page2) != orderMap.at(page1).end()) {
-                // Swap pages if the order is violated
+            if (pattern.find(cur) != pattern.end() && find(pattern.at(cur).begin(), pattern.at(cur).end(), next) != pattern.at(cur).end()) {
                 swap(row[i], row[i + 1]);
                 swapped = true;
             }
         }
-    } while (swapped);
+    }
     return row;
 }
 

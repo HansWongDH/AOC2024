@@ -4,12 +4,33 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <limits.h>
+#include <math.h>
 
 typedef struct {
     unsigned long long key;
     unsigned long long numbers[500];
     int num_count;
 } KeyData;
+
+unsigned long long concat(unsigned long long num1, unsigned long long num2) {
+    unsigned long long temp = num2;
+    int digits = 0;
+
+    while (temp > 0) {
+        digits++;
+        temp /= 10;
+    }
+
+    unsigned long long power_of_ten = 1;
+    for (int i = 0; i < digits; i++) {
+        power_of_ten *= 10;
+    }
+
+    unsigned long long result = num1 * power_of_ten + num2;
+
+    return result;
+}
+
 
 int parse_line(const char *line, KeyData *data) {
     char *token;
@@ -45,6 +66,9 @@ bool ruleCheck(KeyData data, int size, unsigned long long  currentvalue, int ind
         return true;
     }
     if (ruleCheck(data, size, currentvalue * nextvalue, index + 1)){
+        return true;
+    }
+    if (ruleCheck(data, size, concat(currentvalue, nextvalue), index + 1)) {
         return true;
     }
     return false;
